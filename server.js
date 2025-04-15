@@ -29,13 +29,13 @@ app.get('/', (req, res) => {
 
 
 //index 
-app.get('/', (req, res) => {
+app.get('/api/movies', (req, res) => {
 
   res.json({ message: 'List of movies' })
 })
 
 //show
-app.get('/:id', (req, res) => {
+app.get('/api/movies/:id', (req, res) => {
 
   const { id } = req.params
   res.json({ message: `List of movies by id:${id}` })
