@@ -11,8 +11,18 @@ function index(req, res) {
 }
 
 function show(req, res) {
-  const { id } = req.params
-  res.json({ message: `List of movies by id: ${id}` })
+  const id = Number(req.params.id)
+
+  const sql = 'SELECT * FROM movies WHERE id = ?'
+
+  connection.query(sql, [id], (err, results) => {
+    if (err) return res.status(500).json({ error: err.message })
+    if (results === 0) return res.status(404).json({ error: 'Movie not found' })
+
+    const movie = results[0]
+
+    res.json(movie)
+  })
 }
 
 module.exports = {
