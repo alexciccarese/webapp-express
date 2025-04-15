@@ -1,13 +1,13 @@
 const express = require('express')
 const cors = require('cors')
 const app = express()
-
-const PORT = process.env.port || 3004
+const PORT = process.env.PORT || 3004
+const movieRoutes = require('./routes/movies')
 
 //middleware
 app.use(cors(
   {
-    origin: process.env.FRONT_URL || 'htthttp://localhost:5173'
+    origin: process.env.FRONT_URL || 'http://localhost:5173'
   }
 ))
 
@@ -22,25 +22,14 @@ app.listen(PORT, () => {
 })
 
 
-// routes
+// primary route
 app.get('/', (req, res) => {
   res.send('Movies API server')
 })
 
 
-//index 
-app.get('/api/movies', (req, res) => {
-
-  res.json({ message: 'List of movies' })
-})
-
-//show
-app.get('/api/movies/:id', (req, res) => {
-
-  const { id } = req.params
-  res.json({ message: `List of movies by id:${id}` })
-})
-
+// use movie router
+app.use('/api/movies', movieRoutes)
 
 
 //500 server error

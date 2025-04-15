@@ -4,7 +4,7 @@ const Credentials = {
   host: process.env.DB_HOST,
   port: process.env.DB_PORT,
   user: process.env.DB_USER,
-  database: process.env.DB_NAME, 
+  database: process.env.DB_NAME, // Corretto da "name" a "database"
   password: process.env.DB_PASSWORD,
 };
 
