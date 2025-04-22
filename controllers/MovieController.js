@@ -37,8 +37,9 @@ function show(req, res) {
 function storeReview(req, res) {
 
   const id = Number(req.params.id)
-  const { name, text, vote } = req.body
+  const { name, review, vote } = req.body
 
+  const text = review
   const created_at = new Date().toISOString().slice(0, 19).replace('T', ' ')
   const updated_at = created_at
 
