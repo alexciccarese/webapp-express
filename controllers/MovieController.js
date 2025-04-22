@@ -33,8 +33,32 @@ function show(req, res) {
   })
 }
 
+
+function storeReview(req, res) {
+
+  const id = Number(req.params.id)
+  const { name, review, vote } = req.body
+
+  const created_at = new Date().toISOString().slice(0, 19).replace('T', ' ')
+  const updated_at = created_at
+
+
+  const insertSql = 'INSERT INTO reviews (movie_id, name, review, vote, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?)'
+  const values = [id, name, review, vote, created_at, updated_at]
+
+  connection.query(insertSql, values, (err, results) => {
+    if (err) return res.status(500).json({ error: err.message })
+
+
+    console.log(results);
+    res.status(201).json({ message: 'Review added successfully', reviewId: results.insertId })
+  })
+
+}
+
 module.exports = {
   index,
-  show
+  show,
+  storeReview
 }
 
